@@ -6,7 +6,7 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:33:45 by esterna           #+#    #+#             */
-/*   Updated: 2017/04/13 12:02:28 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/04/13 16:16:15 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	board = ft_2dstrnew(BOARD_SIZE, BOARD_SIZE); 
-	while (board[i++])
+	while (i++ < BOARD_SIZE)
 		ft_memset(board[i], (int)'.', BOARD_SIZE);
 	Solve(board, 2, pieces, numTetri);
 	return (0);
