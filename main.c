@@ -50,11 +50,10 @@ int			main(int argc, char **argv)
 		ft_putchar('\n');
 		n++;
 	}
-	board = ft_2dstrnew(13, 13); 
+	board = ft_2dstrnew(13, 13);
 	while (++i < 13)
 		ft_memset(board[i], (int)'.', 13);
-	place = (int *)malloc(sizeof(int) * 2);
-	solve(board, boardSize, pieces, numTetri, place);
+	solve(board, boardSize, pieces);
 	i = 0;
 	while (i < 13)
 	{

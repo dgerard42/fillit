@@ -6,7 +6,7 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:34:15 by esterna           #+#    #+#             */
-/*   Updated: 2017/04/29 17:51:27 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/04/29 19:02:00 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void		ft_codegen(char *buf, int *dest)
 					dest[i++] = -(k1 - k2);
 				else
 					dest[i++] = (k2 - k1);
-
 			}
-			k1 = k2;
-			r = 0;
 			k2++;
 			buf++;
 		}
@@ -89,7 +86,7 @@ int			**translator(char *file, int tetrominoes)
 		free(buf);
 		return (NULL);
 	}
-	lst = ft_2dintarray((size_t)tetrominoes, (size_t)6);	
+	lst = ft_2dintarray((size_t)tetrominoes, (size_t)6);
 	while (read(fd, buf, 21) > 0)
 	{
 		if (fd == -1)
