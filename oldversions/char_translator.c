@@ -6,11 +6,12 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:34:15 by esterna           #+#    #+#             */
-/*   Updated: 2017/04/13 11:57:43 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/04/29 17:35:32 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libfill.h"
 
 char		*trans_g1(char *buf)
 {

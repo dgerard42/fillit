@@ -76,5 +76,7 @@ char		*ft_strrev(char *s);
 char		*ft_strjoini(const char *s1, const char *s2, size_t i);
 char		**ft_2dstrnew(size_t x, size_t y);
 void		*ft_realloc(void *ptr, size_t size);
+int			**ft_2dintarray(size_t y, size_t x);
+int			*ft_intarraynew(size_t x);
 
 #endif

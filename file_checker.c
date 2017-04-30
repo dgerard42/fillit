@@ -6,11 +6,12 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:33:32 by esterna           #+#    #+#             */
-/*   Updated: 2017/04/12 19:26:38 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/04/17 17:40:07 by esterna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libfill.h"
 
 int		checkchrs(char *str)
 {
@@ -77,7 +78,7 @@ int		checktets(char *str)
 	return (((conxs == 6) || (conxs == 8)) ? 1 : 0);
 }
 
-int		filechecker(char *filename)
+int		file_checker(char *filename)
 {
 	int		fd;
 	int		rd;
@@ -95,13 +96,24 @@ int		filechecker(char *filename)
 		last = rd;	
 		buf[rd] = 0;
 		if (fd == -1)
+		{
+			free(buf);
 			return (0);
+		}
 		if (!checkchrs(buf) || !checkrows(buf) || !checktets(buf) || numTetri > 26)
+		{
+			free(buf);
+			close(fd);
 			return (0);
+		}
 		numTetri++;
 	}
+	free(buf);
 	if (last != 20 || numTetri > 26)
+	{
+		close(fd);
 		return (0);
+	}
 	if (close(fd) == -1)
 		return (0);
 	return (numTetri);	
