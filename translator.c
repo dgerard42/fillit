@@ -6,7 +6,7 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:34:15 by esterna           #+#    #+#             */
-/*   Updated: 2017/04/29 19:02:00 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:03:27 by esterna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int			**translator(char *file, int tetrominoes)
 		free(lst);
 		return (NULL);
 	}
+	lst[tetrominoes] = NULL;
 	return (lst);
 }

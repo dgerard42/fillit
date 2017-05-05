@@ -1,14 +1,11 @@
 NAME = fillit
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 DEPS = libft.a
 FUNCTIONS = main.c\
-			pieceFits.c\
-			addPiece.c\
-			nextNum.c\
 			file_checker.c\
-			displayBoard.c\
-			tetriTranslator.c\
-			solve.c\
+			display_board.c\
+			translator.c\
+			solver.c\
 
 all: $(NAME)
 
