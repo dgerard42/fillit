@@ -9,11 +9,15 @@
 # include <stdio.h>
 # include <stdbool.h>
 
-# define BOARD_SIZE 13
-
 int				**translator(char *file, int tetrominoes);
 int				file_checker(char *filename);
 void			display_board(char **board, int boardSize);
-bool			solver(char **board, int *board_size, int **pieces); 
+bool			solver(char **board, int *board_size, int **pieces);
+char			check_alpha(char **board);
+int				rough_sqrt(int n);
+void 			remove_piece(char **board);
+void 			add_piece(char **board, int *piece, int *place);
+void			increment_place(int *place, int board_size);
+bool			check_piece(char **board, int size, int *piece, int *place);
 
 #endif

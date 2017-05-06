@@ -28,45 +28,10 @@ void		free_array(void **lst, int n)
 	free(lst);
 }
 
-void		put_int_array(int **lst, int n, int l)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (j <= n)
-	{
-		if (lst[j] == NULL)
-			ft_putstr("NULL");
-		else
-			while (i < l)
-			{
-				ft_putnbr(lst[j][i]);
-				ft_putchar(' ');
-				i++;
-			}
-		ft_putchar('\n');
-		i = 0;
-		j++;
-	}
-	ft_putchar('\n');
-}
-
-int			rough_sqrt(int n)
-{
-	int i;
-
-	i = 1;
-	while (i * i < n)
-		i++;
-	return (i);
-}
-
 int			main(int argc, char **argv)
 {
 	int 	i;
-	int		numTetri;
+	int		num_tetri;
 	int		**pieces;
 	char	**board;
 	int		*board_size;
@@ -78,26 +43,25 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	argv++;
-	numTetri = file_checker(*argv);
-	if (!numTetri)
+	num_tetri = file_checker(*argv);
+	if (!num_tetri)
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
-	board_size = (int *)malloc(sizeof(int) * 1);
-	*board_size = rough_sqrt(4 * numTetri);
-	pieces = translator(*argv, numTetri);
+	pieces = translator(*argv, num_tetri);
 	if (!pieces || !*pieces)
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
-	/*put_int_array(pieces, numTetri, 6);*/	
 	board = ft_2dstrnew(13, 13);
 	while (++i < 13)
 		ft_memset(board[i], (int)'.', 13);
+	board_size = (int *)malloc(sizeof(int) * 1);
+	*board_size = rough_sqrt(4 * num_tetri);
 	solver(board, board_size, pieces);
 	free_array((void **)board, 13);
-	free_array((void **)pieces, numTetri);
+	free_array((void **)pieces, num_tetri);
 	return (0);
 }

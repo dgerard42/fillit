@@ -13,29 +13,6 @@
 #include "libft.h"
 #include "libfill.h"
 
-char			check_alpha(char **board)
-{
-	int 	i;
-	int 	j;
-	char	alpha;
-
-	i = 0;
-	j = 0;
-	alpha = '@';
-	while (board[i])
-	{
-		while(board[i][j])
-		{
-			if (ft_isalpha((int)(board[i][j])) && board[i][j] > alpha)
-				alpha = board[i][j];
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	return (alpha);
-}
-
 void 			remove_piece(char **board)
 {
 	int i;
@@ -95,6 +72,32 @@ bool			check_piece(char **board, int size, int *piece, int *place)
 	return (false);
 }
 
+bool				piece_is_legit(char **board, int **pieces, int **place, int *board_size)
+{
+	add_piece(board, *pieces, *place);
+	if (solver(board, board_size, pieces + 1))
+		return (true);
+	remove_piece(board);
+	increment_place(*place, *board_size);
+	return (false);
+}
+
+bool				ft_ugh(char **board, int **place, int **pieces, int *board_size)
+{
+	increment_place(place, *board_size);
+	if (place[0] >= *board_size && (check_alpha(board) + 1 == 'A' || !ft_memcmp(pieces, pieces - 1, 6)))
+	{
+		*board_size = *board_size + 1;
+		place[0] = 0;
+		place[1] = 0;
+	}
+	else if (place[0] >= *board_size)
+	{
+		free(place);
+		return (false);
+	}
+}
+
 bool				solver(char **board, int *board_size, int **pieces)
 {
 	int *place;
@@ -112,32 +115,16 @@ bool				solver(char **board, int *board_size, int **pieces)
 	{
 		if (check_piece(board, *board_size, *pieces, place))
 		{
-			add_piece(board, *pieces, place);
-			if (solver(board, board_size, pieces + 1))
+			if(piece_is_legit(board, pieces, &place, board_size))
 			{
 				free(place);
-				return (true);
+				return(true);
 			}
-			remove_piece(board);
-			increment_place(place, *board_size); 	
 		}
 		else
 		{
-			increment_place(place, *board_size);
-			if (place[0] >= *board_size && (check_alpha(board) + 1 == 'A' || !ft_memcmp(pieces, pieces - 1, 6))) 
-			{
-				*board_size = *board_size + 1;
-				place[0] = 0;
-				place[1] = 0;
-			}
-			else if (place[0] >= *board_size)
-			{
-				free(place);
-				return (false);
-			}
+			if(ft_ugh(char **board, int **place, int **pieces, int *board_size))
 		}
-	/*	display_board(board, *board_size);
-		ft_putchar('\n');*/
 	}
 	return (false);
 }
