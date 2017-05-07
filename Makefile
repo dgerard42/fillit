@@ -12,7 +12,7 @@ FUNCTIONS = main.c\
 all: $(NAME)
 
 $(NAME):
-	gcc -g $(CFLAGS) -o $@ $(FUNCTIONS) libft.a
+	gcc $(CFLAGS) -o $@ $(FUNCTIONS) libft.a
 
 clean:
 	/bin/rm -f rm $(NAME)

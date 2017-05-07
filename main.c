@@ -6,7 +6,7 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:33:45 by esterna           #+#    #+#             */
-/*   Updated: 2017/05/03 19:46:07 by esterna          ###   ########.fr       */
+/*   Updated: 2017/05/07 15:20:28 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,36 @@ void		free_array(void **lst, int n)
 	free(lst);
 }
 
-int			check_inputs(int usage, char **filename)
+int			check_inputs(int usage, char *filename)
 {
-	
+	int num_tetri;
+
 	if (usage != 2)
 	{
 		ft_putstr("usage:\nyou need to input fillit test files\n");
 		return (0);
 	}
-	argv++;
-	num_tetri = file_checker(*argv);
+	num_tetri = file_checker(filename);
 	if (!num_tetri)
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
+	return (num_tetri);
 }
 
 int			main(int argc, char **argv)
 {
-	int 	i;
+	int		i;
 	int		num_tetri;
 	int		**pieces;
 	char	**board;
 	int		*board_size;
 
 	i = -1;
-
+	num_tetri = check_inputs(argc, *++argv);
+	if (!num_tetri)
+		return (0);
 	pieces = translator(*argv, num_tetri);
 	if (!pieces || !*pieces)
 	{
