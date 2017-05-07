@@ -19,5 +19,7 @@ void 			remove_piece(char **board);
 void 			add_piece(char **board, int *piece, int *place);
 void			increment_place(int *place, int board_size);
 bool			check_piece(char **board, int size, int *piece, int *place);
+bool			grow_board(char **board, int **place, int **pieces, int *board_size);
+bool			fill_board(char **board, int **pieces, int **place, int *board_size);
 
 #endif

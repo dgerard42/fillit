@@ -6,11 +6,13 @@ FUNCTIONS = main.c\
 			display_board.c\
 			translator.c\
 			solver.c\
+			auxillaries.c\
+			check_add_remove.c\
 
 all: $(NAME)
 
 $(NAME):
-	gcc $(CFLAGS) -o $@ $(FUNCTIONS) libft.a
+	gcc -g $(CFLAGS) -o $@ $(FUNCTIONS) libft.a
 
 clean:
 	/bin/rm -f rm $(NAME)

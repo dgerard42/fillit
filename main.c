@@ -28,16 +28,10 @@ void		free_array(void **lst, int n)
 	free(lst);
 }
 
-int			main(int argc, char **argv)
+int			check_inputs(int usage, char **filename)
 {
-	int 	i;
-	int		num_tetri;
-	int		**pieces;
-	char	**board;
-	int		*board_size;
-
-	i = -1;
-	if (argc != 2)
+	
+	if (usage != 2)
 	{
 		ft_putstr("usage:\nyou need to input fillit test files\n");
 		return (0);
@@ -49,6 +43,18 @@ int			main(int argc, char **argv)
 		ft_putstr("error\n");
 		return (0);
 	}
+}
+
+int			main(int argc, char **argv)
+{
+	int 	i;
+	int		num_tetri;
+	int		**pieces;
+	char	**board;
+	int		*board_size;
+
+	i = -1;
+
 	pieces = translator(*argv, num_tetri);
 	if (!pieces || !*pieces)
 	{
