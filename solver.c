@@ -6,14 +6,37 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 17:29:52 by dgerard           #+#    #+#             */
-/*   Updated: 2017/05/06 20:16:24 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/05/07 22:26:10 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libfill.h"
 
-void			increment_place(int *place, int bsize)
+char			check_alpha(char **board)
+{
+	int		i;
+	int		j;
+	char	alpha;
+
+	i = 0;
+	j = 0;
+	alpha = '@';
+	while (board[i])
+	{
+		while (board[i][j])
+		{
+			if (ft_isalpha((int)(board[i][j])) && board[i][j] > alpha)
+				alpha = board[i][j];
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (alpha);
+}
+
+static void			increment_place(int *place, int bsize)
 {
 	int y;
 	int x;
@@ -29,21 +52,21 @@ void			increment_place(int *place, int bsize)
 	}
 }
 
-bool			fill_board(char **board, int **pieces, int **place, int *bsize)
+static bool			fill_brd(char **brd, int **pieces, int **place, int *bsize)
 {
-	add_piece(board, *pieces, *place);
-	if (solver(board, bsize, pieces + 1))
+	add_piece(brd, *pieces, *place);
+	if (solver(brd, bsize, pieces + 1))
 		return (true);
-	remove_piece(board);
+	remove_piece(brd);
 	increment_place(*place, *bsize);
 	return (false);
 }
 
-bool			grow_board(char **board, int **place, int **pieces, int *bsize)
+static bool			grow_brd(char **brd, int **place, int **pieces, int *bsize)
 {
 	increment_place(*place, *bsize);
 	if (*place[0] >= *bsize &&
-			(check_alpha(board) + 1 == 'A' ||
+			(check_alpha(brd) + 1 == 'A' ||
 				!ft_memcmp(pieces, pieces - 1, 6)))
 	{
 		*bsize = *bsize + 1;
@@ -56,27 +79,27 @@ bool			grow_board(char **board, int **place, int **pieces, int *bsize)
 	return (true);
 }
 
-bool			solver(char **board, int *bsize, int **pieces)
+bool				solver(char **brd, int *bsize, int **pieces)
 {
 	int *place;
 
 	place = ft_intarraynew(2);
 	if (*pieces == NULL)
 	{
-		display_board(board, *bsize);
+		display_board(brd, *bsize);
 		free(place);
 		return (true);
 	}
 	while (*pieces != NULL)
-		if (check_piece(board, *bsize, *pieces, place))
+		if (check_piece(brd, *bsize, *pieces, place))
 		{
-			if (fill_board(board, pieces, &place, bsize))
+			if (fill_brd(brd, pieces, &place, bsize))
 			{
 				free(place);
 				return (true);
 			}
 		}
-		else if (!(grow_board(board, &place, pieces, bsize)))
+		else if (!(grow_brd(brd, &place, pieces, bsize)))
 		{
 			free(place);
 			return (false);

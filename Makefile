@@ -3,10 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 DEPS = libft.a
 FUNCTIONS = main.c\
 			file_checker.c\
-			display_board.c\
 			translator.c\
 			solver.c\
-			auxillaries.c\
 			check_add_remove.c\
 
 all: $(NAME)

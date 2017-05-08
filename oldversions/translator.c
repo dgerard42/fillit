@@ -6,14 +6,14 @@
 /*   By: esterna <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 12:34:15 by esterna           #+#    #+#             */
-/*   Updated: 2017/05/07 22:27:14 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/05/02 13:03:27 by esterna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libfill.h"
 
-static void			ft_codegen(char *buf, int *dest)
+void		ft_codegen(char *buf, int *dest)
 {
 	int i;
 	int k1;
@@ -70,43 +70,40 @@ static void			ft_codegen(char *buf, int *dest)
 		}
 	}
 }
-static int	read_loop(int fd, int **lst)
+
+int			**translator(char *file, int tetrominoes)
 {
 	int		i;
+	int		fd;
 	char	*buf;
+	int		**lst;
 
 	i = 0;
 	buf = (char *)malloc(sizeof(char) * 21);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		free(buf);
+		return (NULL);
+	}
+	lst = ft_2dintarray((size_t)tetrominoes, (size_t)6);
 	while (read(fd, buf, 21) > 0)
 	{
 		if (fd == -1)
 		{
 			free(buf);
 			free(lst);
-			return (0);
+			return (NULL);
 		}
 		ft_codegen(buf, lst[i]);
 		i++;
 	}
-	free(buf);
-	return (i);
-}
-int			**translator(char *file, int num_tetri)
-{
-	int		i;
-	int		fd;
-	int		**lst;
-
-	lst = ft_2dintarray((size_t)num_tetri, (size_t)6);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	i = read_loop(fd, lst);
-	if (i != num_tetri)
+	if (i != tetrominoes)
 	{
+		free(buf);
 		free(lst);
 		return (NULL);
 	}
-	lst[num_tetri] = NULL;
+	lst[tetrominoes] = NULL;
 	return (lst);
 }

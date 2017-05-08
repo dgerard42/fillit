@@ -10,6 +10,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libfill.h"
+#include <stdio.h>
 
 int			main(void)
 {
@@ -25,7 +27,7 @@ int			main(void)
 	};
 	while(i++ < 22)
 	{
-		res = filechecker(files[i]);
+		res = file_checker(files[i]);
 		printf("---------^^----|||test %s == %d|||----^^----------\n", files[i], res);
 	}
 }
