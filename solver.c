@@ -6,14 +6,14 @@
 /*   By: dgerard <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/28 17:29:52 by dgerard           #+#    #+#             */
-/*   Updated: 2017/05/07 22:26:10 by dgerard          ###   ########.fr       */
+/*   Updated: 2017/05/09 11:37:44 by dgerard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libfill.h"
 
-char			check_alpha(char **board)
+char				check_alpha(char **board)
 {
 	int		i;
 	int		j;
